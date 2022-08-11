@@ -1,0 +1,120 @@
+<p-toast></p-toast>
+<p-breadcrumb [model]="items"></p-breadcrumb>
+<div class="box">
+    <app-title [title]="_title"></app-title>
+    <div class="right">
+        <button ngClass="bBack" routerLink="/home/master-data" pButton pRipple type="button" label="BACK"
+            class="p-button-outlined p-button-secondary"></button>
+    </div>
+</div>
+<div class="box">
+    <div class="p-field-checkbox">
+        <p-checkbox ngClass="cbox" (onChange)="isCheck(checked)" [(ngModel)]="checked" [binary]="true" [value]="true"
+            label="Included Inactive" inputId="binary"></p-checkbox>
+    </div>
+    <div class="right">
+        <button pButton pRipple type="button" [routerLink]="['add-new']" label="ADD NEW"
+            class="p-button-outlined p-button-secondary"></button>
+    </div>
+</div>
+<div class="card">
+    <p-table [(first)]="first" ngClass="table" #dt1 [value]="users" [columns]="selectedColumns" dataKey="employeeID" [rows]="10"
+        [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" [scrollable]="true"
+        styleClass="p-datatable-customers p-datatable-gridlines" [paginator]="true"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
+        <ng-template pTemplate="caption">
+            <div class="flex align-items-center justify-content-between">
+                <div class="box1">
+                    <div class="export">
+                        <button (click)="exportExcel()" pButton pRipple label="Export" icon="pi pi-upload"
+                            class="p-button-outlined p-button-secondary"></button>
+                    </div>
+                    <p class="col">Column:</p>
+                    <p-multiSelect [options]="cols" optionLabel="header" [(ngModel)]="selectedColumns"
+                        selectedItemsLabel="{0} columns selected" [style]="{width: '250px'}"
+                        placeholder="Choose Columns"></p-multiSelect>
+                </div>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header" let-columns>
+            <tr style="font-size: 10pt;">
+                <th style="min-width:30px">No</th>
+                <th style="min-width:300px">User Name</th>
+                <th style="min-width:300px" *ngFor="let col of columns">
+                    {{col.header}}
+                </th>
+                <th style="min-width:250px"></th>
+            </tr>
+            <tr>
+                <th style="min-width:30px">
+                </th>
+                <th style="min-width:300px">
+                    <input pInputText type="text"
+                        (input)="dt1.filter($any($event.target)?.value, 'userName', 'contains')"
+                        [value]="$any(dt1.filters['userName'])?.value" placeholder="Search" class="p-column-filter">
+                </th>
+                <th style="min-width:300px">
+                    <input pInputText type="text"
+                        (input)="dt1.filter($any($event.target)?.value, 'employeeID', 'contains')"
+                        [value]="$any(dt1.filters['employeeID'])?.value" placeholder="Search" class="p-column-filter">
+                </th>
+                <th style="min-width:300px">
+                    <input pInputText type="text"
+                        (input)="dt1.filter($any($event.target)?.value, 'displayName', 'contains')"
+                        [value]="$any(dt1.filters['displayName'])?.value" placeholder="Search" class="p-column-filter">
+                </th>
+                <th style="min-width:300px">
+                    <input pInputText type="text"
+                        (input)="dt1.filter($any($event.target)?.value, 'userRole', 'contains')"
+                        [value]="$any(dt1.filters['userRole'])?.value" placeholder="Search" class="p-column-filter">
+                </th>
+                <th style="min-width:300px">
+                    <input pInputText type="text"
+                        (input)="dt1.filter($any($event.target)?.value, 'department', 'contains')"
+                        [value]="$any(dt1.filters['department'])?.value" placeholder="Search" class="p-column-filter">
+                </th>
+                <th style="min-width:300px">
+                    <input pInputText type="text"
+                        (input)="dt1.filter($any($event.target)?.value, 'jobTitle', 'contains')"
+                        [value]="$any(dt1.filters['jobTitle'])?.value" placeholder="Search" class="p-column-filter">
+                </th>
+                <th style="min-width:300px">
+                    <input pInputText type="text" (input)="dt1.filter($any($event.target)?.value, 'email', 'contains')"
+                        [value]="$any(dt1.filters['email'])?.value" placeholder="Search" class="p-column-filter">
+                </th>
+                <th style="min-width:300px">
+                    <input pInputText type="text"
+                        (input)="dt1.filter($any($event.target)?.value, 'phoneNumber', 'contains')"
+                        [value]="$any(dt1.filters['phoneNumber'])?.value" placeholder="Search" class="p-column-filter">
+                </th>
+                <th style="min-width:300px">
+                    <input pInputText type="text"
+                        (input)="dt1.filter($any($event.target)?.value, 'workingTime', 'contains')"
+                        [value]="$any(dt1.filters['workingTime'])?.value" placeholder="Search" class="p-column-filter">
+                </th>
+                <th style="min-width:250px">
+                </th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-user let-columns="columns">
+            <tr>
+                <td style="min-width:30px"></td>
+                <td style="min-width:300px"><a routerLink="edit/{{user.employeeID}}">{{user.userName}}</a></td>
+                <td *ngFor="let col of columns" style="min-width:300px">{{user[col.field]}}</td>
+                <td style="min-width:250px">
+                    <button style="margin-right:10px" pButton pRipple icon="pi pi-trash" (click)="deleteUser(user)"
+                        class="p-button-rounded p-button-warning"></button>
+                    <p-inputSwitch (onChange)="changeStatus(user)" [(ngModel)]="user.status"></p-inputSwitch>
+                    <p *ngIf="user.status === true" style="margin-left:10px">Active</p>
+                    <p *ngIf="user.status === false" style="margin-left:10px">InActive</p>
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="emptymessage">
+            <tr>
+                <td colspan="4">No data found !!!</td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>
+<p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>

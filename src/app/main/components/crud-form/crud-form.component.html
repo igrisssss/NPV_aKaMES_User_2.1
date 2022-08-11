@@ -1,0 +1,110 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="box">
+        <div class="left">
+            <h5>User Name*</h5>
+            <input  formControlName="userName" [ngClass]="{ 'is-invalid': submitted && f['userName'].errors }"
+                class="form-control" type="text" pInputText>
+            <div *ngIf="submitted && f['userName'].errors" class="invalid-feedback">
+                <small id="username2-help" class="p-error block" *ngIf="f['userName'].errors['required']">User Name is required</small>
+            </div>
+        </div>
+        <div class="center">
+            <h5>User Roles*</h5>
+            <p-dropdown [ngClass]="{ 'is-invalid': submitted && f['userRole'].errors }" formControlName="userRole"
+                class="form-control" [style]="{'width':'208px'}" [options]='[{name: "Editable1"}, {name: "Editable2"}, 
+            {name: "Editable3"}, {name: "Editable4"}, 
+            {name: "Editable5"}]' optionLabel="name" optionValue="name"></p-dropdown>
+            <div *ngIf="submitted && f['userRole'].errors" class="invalid-feedback">
+                <small id="username2-help" class="p-error block" *ngIf="f['userRole'].errors['required']">User Role is required</small>
+            </div>
+        </div>
+        <div class="right">
+            <h5>Email</h5>
+            <input [ngClass]="{ 'is-invalid': submitted && f['email'].errors }" type="text" formControlName="email"
+                class="form-control" pInputText>
+            <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
+                <small id="username2-help" class="p-error block" *ngIf="f['email'].errors['required']">Email is required</small>
+                <small id="username2-help" class="p-error block" *ngIf="f['email'].errors['email']">Email must be a valid email address</small>
+            </div>
+        </div>
+    </div>
+    <div class="box">
+        <div class="left">
+            <h5>Status</h5>
+            <p-dropdown [style]="{'width':'208px'}" formControlName="status" [options]="items" optionLabel="name"  optionValue="field" placeholder="Active"
+                [itemSize]="2"></p-dropdown>
+        </div>
+        <div class="center">
+            <h5>Department</h5>
+            <input [ngClass]="{ 'is-invalid': submitted && f['department'].errors }" formControlName="department"
+                class="form-control" type="text" pInputText>
+            <div *ngIf="submitted && f['department'].errors" class="invalid-feedback">
+                <small id="username2-help" class="p-error block" *ngIf="f['department'].errors['required']">User Name is required</small>
+            </div>
+        </div>
+        <div class="right">
+            <h5>Phone Number</h5>
+            <input [ngClass]="{ 'is-invalid': submitted && f['phoneNumber'].errors }" formControlName="phoneNumber"
+                class="form-control" type="text" pInputText>
+            <div *ngIf="submitted && f['phoneNumber'].errors" class="invalid-feedback">
+                <small id="username2-help" class="p-error block" *ngIf="f['phoneNumber'].errors['required']">Phone Number is required</small>
+                <small id="username2-help" class="p-error block" *ngIf="f['phoneNumber'].errors['pattern']">Please, Enter 10 digit Phone Number.</small>
+            </div>
+        </div>
+    </div>
+    <div class="box">
+        <div class="left">
+            <h5>Display Name*</h5>
+            <input [ngClass]="{ 'is-invalid': submitted && f['displayName'].errors }" formControlName="displayName"
+                class="form-control" type="text" pInputText>
+            <div *ngIf="submitted && f['displayName'].errors" class="invalid-feedback">
+                <small id="username2-help" class="p-error block" *ngIf="f['displayName'].errors['required']">User Name is required</small>
+            </div>
+        </div>
+        <div class="center">
+            <h5>Job Title</h5>
+            <input [ngClass]="{ 'is-invalid': submitted && f['jobTitle'].errors }" formControlName="jobTitle"
+                class="form-control" type="text" pInputText>
+            <div *ngIf="submitted && f['jobTitle'].errors" class="invalid-feedback">
+                <small id="username2-help" class="p-error block" *ngIf="f['jobTitle'].errors['required']">User Name is required</small>
+            </div>
+        </div>
+        <div class="right">
+            <h5>Working Time</h5>
+            <input [ngClass]="{ 'is-invalid': submitted && f['workingTime'].errors }" formControlName="workingTime"
+                class="form-control" type="text" pInputText>
+            <div *ngIf="submitted && f['workingTime'].errors" class="invalid-feedback">
+                <small id="username2-help" class="p-error block" *ngIf="f['workingTime'].errors['required']">Working Time is required</small>
+                <small id="username2-help" class="p-error block" *ngIf="f['workingTime'].errors['dateValidator']">Invalid Datetime</small>
+            </div>
+        </div>
+    </div>
+    <div class="box">
+        <div *ngIf="!isAddMode">
+            <h3 class="pt-3">Change Password</h3>
+            <p>Leave blank to keep the same password</p>
+        </div>
+        <div class="center">
+            <h5>Password*</h5>
+            <input [ngClass]="{ 'is-invalid': submitted && f['password'].errors }" type="password" formControlName="password"
+                class="form-control" pInputText>
+            <div *ngIf="submitted && f['password'].errors" class="invalid-feedback">
+                <small id="username2-help" class="p-error block" *ngIf="f['password'].errors['required']">Password is required</small>
+                <small id="username2-help" class="p-error block" *ngIf="f['password'].errors['minlength']">Password must be at least 6 characters</small>
+            </div>
+        </div>
+    </div>
+    <div class="box">
+        <div class="bSave">
+            <button pButton pRipple type="submit" [disabled]="loading" [style]="{'width':'110px'}" label="SAVE"
+                class="p-button-outlined p-button-secondary">
+                <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+            </button>
+        </div>
+        <div class="bDiscard">
+            <button pButton pRipple type="button" label="DISCARD" class="p-button-outlined p-button-secondary"
+                routerLink="/home/master-data/user"></button>
+        </div>
+    </div>
+</form>
+<p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>

@@ -1,0 +1,18 @@
+<p-menubar [style]="{'height':'55px'}">
+    <ng-template pTemplate="end">
+        <p-avatar
+        icon="pi pi-user"
+        styleClass="p-mr-2"
+        size="large"
+        shape="circle"
+      ></p-avatar>
+        <button #btn pRipple class="p-button-secondary p-button-text" type="button" pButton label="Display Name" (click)="menu.toggle($event)"></button>
+        <p-tieredMenu #menu [model]="items" [popup]="true"></p-tieredMenu>
+        <i
+        class="pi pi-bell p-mr-4 p-text-secondary"
+        pBadge
+        style="font-size: 1.5rem"
+        value="5"
+        ></i>    
+    </ng-template>
+</p-menubar>

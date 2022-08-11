@@ -1,0 +1,13 @@
+.box {
+    display: flex;
+    margin-top: 30px;
+}
+
+.right{
+    align-self: self-start;
+    margin-left: auto;
+}
+
+.bBack{
+    width: 119px;
+}

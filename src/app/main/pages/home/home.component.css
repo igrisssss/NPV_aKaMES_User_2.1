@@ -1,0 +1,11 @@
+.box {
+    display: flex;
+    margin-bottom: 30px;
+    margin-top: 30px;
+}
+
+.right{
+    align-self: self-start;
+    margin-left: auto;
+}
+

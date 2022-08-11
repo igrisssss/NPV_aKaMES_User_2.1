@@ -1,0 +1,43 @@
+.box {
+    margin-top: 30px;
+    display: flex;
+    margin-bottom: 30px;
+}
+
+.right{
+    align-self: self-start;
+    margin-left: auto;
+}
+
+.bBack{
+    width: 119px;
+}
+
+.cbox{
+    margin-right: 10px;
+}
+
+.col{
+    margin-right: 15px;
+}
+
+.box1{
+    display: flex;
+}
+
+.export{
+    margin-right: 660px;
+}
+
+.table{
+    counter-reset: rowNumber;
+}
+.table tr:not(:first-child) {
+    counter-increment: rowNumber;
+}
+
+.table tr td:first-child::before {
+    content: counter(rowNumber);
+    min-width: 1em;
+    margin-right: 0.5em;
+}
