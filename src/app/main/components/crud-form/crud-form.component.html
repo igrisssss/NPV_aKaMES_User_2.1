@@ -39,7 +39,7 @@
             <input [ngClass]="{ 'is-invalid': submitted && f['department'].errors }" formControlName="department"
                 class="form-control" type="text" pInputText>
             <div *ngIf="submitted && f['department'].errors" class="invalid-feedback">
-                <small id="username2-help" class="p-error block" *ngIf="f['department'].errors['required']">User Name is required</small>
+                <small id="username2-help" class="p-error block" *ngIf="f['department'].errors['required']">Department is required</small>
             </div>
         </div>
         <div class="right">
@@ -58,7 +58,7 @@
             <input [ngClass]="{ 'is-invalid': submitted && f['displayName'].errors }" formControlName="displayName"
                 class="form-control" type="text" pInputText>
             <div *ngIf="submitted && f['displayName'].errors" class="invalid-feedback">
-                <small id="username2-help" class="p-error block" *ngIf="f['displayName'].errors['required']">User Name is required</small>
+                <small id="username2-help" class="p-error block" *ngIf="f['displayName'].errors['required']">Display Name is required</small>
             </div>
         </div>
         <div class="center">
@@ -66,7 +66,7 @@
             <input [ngClass]="{ 'is-invalid': submitted && f['jobTitle'].errors }" formControlName="jobTitle"
                 class="form-control" type="text" pInputText>
             <div *ngIf="submitted && f['jobTitle'].errors" class="invalid-feedback">
-                <small id="username2-help" class="p-error block" *ngIf="f['jobTitle'].errors['required']">User Name is required</small>
+                <small id="username2-help" class="p-error block" *ngIf="f['jobTitle'].errors['required']">Job Title is required</small>
             </div>
         </div>
         <div class="right">
