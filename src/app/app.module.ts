@@ -1,6 +1,6 @@
 import {  NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -34,6 +34,7 @@ import { MessageService } from 'primeng/api';
 import {ToastModule} from 'primeng/toast';
 import { ConfirmationService } from 'primeng/api';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { CrudInterceptor } from './interceptors/crud.interceptor';
 
 
 
@@ -76,7 +77,13 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
     ReactiveFormsModule
   ],
 
-  providers: [MessageService,ConfirmationService],
+  providers: [MessageService,ConfirmationService,            
+              {
+                provide: HTTP_INTERCEPTORS,
+                useClass: CrudInterceptor,
+                multi: true,
+              }
+             ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
